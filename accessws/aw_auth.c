@@ -44,7 +44,9 @@ static void on_job(nw_job_entry *entry, void *privdata)
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &reply);
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);
     curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, (long)(settings.backend_timeout * 1000));
-
+    
+    log_fatal("settings.auth_url: %s", settings.auth_url);
+    
     CURLcode ret = curl_easy_perform(curl);
     if (ret != CURLE_OK) {
         log_fatal("curl_easy_perform fail: %s", curl_easy_strerror(ret));
